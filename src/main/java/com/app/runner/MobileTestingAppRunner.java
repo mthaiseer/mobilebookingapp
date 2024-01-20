@@ -1,5 +1,6 @@
 package com.app.runner;
 
+import com.app.command.*;
 import com.app.controller.MobileTestingController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -8,21 +9,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-/**
- * This class is entry point for mobile booking operations
- *
- * Author: Mohamed Thaiseer
- */
-
 @Component
 @ComponentScan("com.app.controller")
 class MobileTestingAppRunner implements CommandLineRunner {
 
-    private final MobileTestingController mobileTestingSystem;
+    private MobileTestingController mobileTestingController;
 
     @Autowired
-    public MobileTestingAppRunner(MobileTestingController mobileTestingSystem) {
-        this.mobileTestingSystem = mobileTestingSystem;
+    public MobileTestingAppRunner(MobileTestingController mobileTestingController) {
+        this.mobileTestingController = mobileTestingController;
     }
 
     @Override
@@ -39,26 +34,28 @@ class MobileTestingAppRunner implements CommandLineRunner {
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
+            Command command = null;
+
             switch (choice) {
                 case 1:
-                    mobileTestingSystem.displayInventory();
+                    command = new DisplayInventoryCommand(mobileTestingController);
                     break;
                 case 2:
                     System.out.print("Enter phone model to book: ");
                     String modelToBook = scanner.nextLine();
                     System.out.print("Enter your name: ");
                     String userName = scanner.nextLine();
-                    mobileTestingSystem.bookPhone(modelToBook, userName);
+                    command = new BookPhoneCommand(mobileTestingController, modelToBook, userName);
                     break;
                 case 3:
                     System.out.print("Enter phone model to return: ");
                     String modelToReturn = scanner.nextLine();
-                    mobileTestingSystem.returnPhone(modelToReturn);
+                    command = new ReturnPhoneCommand(mobileTestingController, modelToReturn);
                     break;
                 case 4:
                     System.out.print("Enter phone model to get information: ");
                     String modelToGetInfo = scanner.nextLine();
-                    System.out.println(mobileTestingSystem.getPhoneInformation(modelToGetInfo));
+                    command = new GetPhoneInformationCommand(mobileTestingController, modelToGetInfo);
                     break;
                 case 5:
                     System.out.println("Exiting the Mobile Testing App. Goodbye!");
@@ -66,6 +63,12 @@ class MobileTestingAppRunner implements CommandLineRunner {
                     System.exit(0);
                 default:
                     System.out.println("Invalid option. Please choose again.");
+                    continue;
+            }
+
+            // Check if command is not null before executing
+            if (command != null) {
+                command.execute();
             }
         }
     }
