@@ -36,4 +36,24 @@ Following are the main use cases for this application
 5. command and singleton patterns are used for this simplified version
 6. Test cases are available in test package 
 
+### Prerequisites to run 
+1. Java 17 
+2. Git 
+3. Maven 
+
+### How to run application 
+1. clone code using following command
+   ````git clone  https://github.com/mthaiseer/mobilebookingapp.git````
+2. navigate to cloned folder 
+3. execute  mvn clean install
+4. To run application, run command  
+    > java -jar target/app.jar
+
+![img_4.png](img_4.png)
+
+Operations
+1. View all phones
+![img_5.png](img_5.png)
+
+remaining use-cases are self-explanatory 
 
