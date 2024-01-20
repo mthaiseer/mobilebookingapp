@@ -55,5 +55,12 @@ Operations
 1. View all phones
 ![img_5.png](img_5.png)
 
-remaining use-cases are self-explanatory 
+2. Book phone 
+![img_6.png](img_6.png)
+
+3. Check phone status
+![img_7.png](img_7.png)
+
+4. Return phone 
+![img_8.png](img_8.png)
 
