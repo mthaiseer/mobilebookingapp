@@ -61,6 +61,7 @@ Operations
 3. Check phone status
 ![img_7.png](img_7.png)
 
-4. Return phone 
-![img_8.png](img_8.png)
+4. Return phone
+
+ ![img_8.png](img_8.png)
 
